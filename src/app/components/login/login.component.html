@@ -1,0 +1,9 @@
+<div class="wrapper">
+<form [formGroup]="loginForm" (ngSubmit)="validate()">
+    <label for="text">Name</label>
+    <input type="text" formControlName="name" name="name" id="text" class="login" required>
+    <label for="pass">Password</label>
+    <input type="password" formControlName="password" name="password"  id="pass" class="login" required>
+    <button type="submit">Log</button>
+</form>
+</div>
