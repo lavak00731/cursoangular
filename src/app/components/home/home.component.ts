@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Userlog } from "./../../models/userlog";
+import { UserService } from './../../services/user.service';
+
 
 @Component({
   selector: 'app-home',
@@ -6,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  user: Userlog;
 
-  constructor() { }
+  constructor(private _userService: UserService) { }
 
   ngOnInit(): void {
-  }
-
+    this._userService.loggedUser.subscribe((user) => this.user = user)
+  }  
 }

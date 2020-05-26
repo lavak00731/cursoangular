@@ -4,6 +4,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { LoginserviceService } from './../../services/loginservice.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from './../../services/user.service';
+import { Userlog } from '../../models/userlog';
+
 
 @Component({
   selector: 'app-login',
@@ -20,8 +23,7 @@ export class LoginComponent implements OnInit {
     ])
   });
   
-  
-  constructor(private loginS: LoginserviceService, private _snackBar: MatSnackBar, private router: Router) { }
+  constructor(private loginS: LoginserviceService, private _snackBar: MatSnackBar, private router: Router, private _userService: UserService) { }
   
   ngOnInit(): void {
     
@@ -39,7 +41,9 @@ export class LoginComponent implements OnInit {
 
     if(this.loginForm.value.name && this.loginForm.value.password) {
       if(this.loginS.isValidUser) {
-        this.showFeedback(this.loginForm.value.name, ' is logged')
+        this.showFeedback(this.loginForm.value.name, ' is logged');
+        const log: Userlog = this.loginForm.value;
+        this._userService.setUserInfo(log);
         this.goToItems();
       }
     }
